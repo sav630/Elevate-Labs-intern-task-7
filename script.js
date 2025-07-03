@@ -20,12 +20,16 @@ function fetchUsers() {
       userList.innerHTML = ''; // Clear previous results
 
       users.forEach(user => {
+        const firstName = user.name.first.toLowerCase();
+        const lastName = user.name.last.toLowerCase();
+        const generatedEmail = `${firstName}.${lastName}@gmail.com`;
+
         const userDiv = document.createElement('div');
         userDiv.className = 'user-card';
         userDiv.innerHTML = `
           <img src="${user.picture.medium}" alt="User Photo" />
           <h3>${user.name.first} ${user.name.last}</h3>
-          <p><strong>Email:</strong> ${user.email}</p>
+          <p><strong>Email:</strong> ${generatedEmail}</p>
           <p><strong>Country:</strong> ${user.location.country}</p>
         `;
         userList.appendChild(userDiv);
@@ -36,6 +40,5 @@ function fetchUsers() {
       document.getElementById('userList').innerHTML = 'Failed to load users.';
     });
 }
-
 
 
